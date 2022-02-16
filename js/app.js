@@ -31,6 +31,8 @@ const filterAction = (value) => {
   value == "/" ? setOperation('/'):null;
   value == "%" ? setOperation('%'):null;
   value == "+/-" ? setOperation('+/-'):null;
+
+  value == "=" ? calculation():null;
 }
 
 const addNumberInput = (value) => {
@@ -67,24 +69,25 @@ const calculation = () => {
   let total = 0;
   const inputScreen = document.querySelector('.calculator__screen');
   // <input />
-  let valueOne = inputValueMemo;
-  let valueTwo = parseInt(inputScreen.value);
-
-  console.log('valueOne', typeof valueOne);
-  console.log('valueTwo', typeof valueTwo);
-  console.log(operator);
-  console.log('dentro de calculation');
-
+  let valueOne = transformCommaToPoint(inputValueMemo); // es un number
+  let valueTwo = transformCommaToPoint(inputScreen.value); // siempre es un string, pero cuando pasa por la funcion es un numero float
+ 
   // suma
   if(operator === '+' && inputScreen.value !== "") {
-    console.log('estoy dentro de la suma');
     total = valueOne + valueTwo;
   }
 
   inputValueMemo = total;
-  console.log(inputValueMemo);
+  
   inputScreen.value = "";
   inputScreen.placeholder = total;
   
-
+}
+// 5,6 necesitamos trasnformarlo en 5.6
+const transformCommaToPoint = (value) => {
+  if(typeof value !== "number") {
+    let resultTransform = value.replace(',','.');
+    return parseFloat(resultTransform);
+  }
+  return value;
 }
