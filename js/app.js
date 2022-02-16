@@ -53,13 +53,6 @@ const filterAction = (value) => {
     default:
       break;
   }
-  // value == "+" ? setOperation('+'):null;
-  // value == "-" ? setOperation('-'):null;
-  // value == "x" ? setOperation('*'):null;
-  // value == "/" ? setOperation('/'):null;
-  // value == "%" ? setOperation('%'):null;
-  // value == "+/-" ? setOperation('+/-'):null;
-  // value == "=" ? calculation():null;
 }
 
 const addNumberInput = (value) => {
@@ -102,7 +95,6 @@ const calculation = () => {
   if(operator === '+' && inputScreen.value !== "") {
     total = valueOne + valueTwo;
   }
- 
   // La resta
   if(operator === '-' && inputScreen.value !=="") {
     if(valueOne !== 0) {
@@ -111,7 +103,6 @@ const calculation = () => {
       total = valueTwo;
     }
   }
-  
   // Multiplicación
   if(operator === '*' && inputScreen.value !=="") {
     if(valueOne !== 0) {
@@ -120,7 +111,6 @@ const calculation = () => {
       total = valueTwo;
     }
   }
-
   // División
 
   if(operator === '/' && inputScreen.value !=="") {
@@ -136,7 +126,11 @@ const calculation = () => {
       total =  valueTwo / 100;
   }
   //  "+/-"
-
+  if(operator === '+/-' && inputScreen.value !=="") {
+    if(valueTwo > 0) {
+      total = -valueTwo;
+    }
+  }
   // antes  de asignarle a la variable global de memoria
   // hacemos la transformacion
   total = transformPointToComma(total);
